@@ -18,12 +18,16 @@ credits; other fields are planned (see [Roadmap](#roadmap)).
 
 ## Usage
 
+Use the name of your own save: a slot folder is named after the save you
+created in the game. `MySave` below is a placeholder — do not look for it in
+your `SaveGames`, substitute your real slot name.
+
 ```bash
 # print the current credits balance of a slot
-python3 the-crust-edit-save.py "<SaveGames>/NEW_ASTA" --detect
+python3 the-crust-edit-save.py "<SaveGames>/MySave" --detect
 
 # set credits (backs up the original to Level.sav.bak on first run)
-python3 the-crust-edit-save.py "<SaveGames>/NEW_ASTA" 58546424
+python3 the-crust-edit-save.py "<SaveGames>/MySave" 58546424
 ```
 
 `<SaveGames>` is the game's save directory:
@@ -33,8 +37,9 @@ python3 the-crust-edit-save.py "<SaveGames>/NEW_ASTA" 58546424
 | Windows          | `%LOCALAPPDATA%\TheCrust\Saved\SaveGames` |
 | Linux (Proton)   | `<steamlibs>/steamapps/compatdata/1465470/pfx/drive_c/users/steamuser/AppData/Local/TheCrust/Saved/SaveGames` |
 
-Any slot folder works: a named save (`NEW_ASTA`), the `sas` quick-save, or an
-`Autosave_N_*D_*` folder. The value is stored as float32, so integers above
+Slot folder names are the save names you created in the game (or the game's
+own quick-save and autosave folders, such as `Autosave_N_1D_...`). Each folder
+holds its own `Level.sav`. The value is stored as float32, so integers above
 16 777 216 lose precision; pick a float32-exact number if that matters.
 
 ## How it works
@@ -55,7 +60,7 @@ balance on its own.
 ## Rollback
 
 ```bash
-cd <SaveGames>/NEW_ASTA
+cd "<SaveGames>/MySave"
 mv Level.sav.bak Level.sav
 ```
 
